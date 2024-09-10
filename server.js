@@ -18,7 +18,7 @@ const WEBAPP_URL = process.env.WEBAPP;
 const PORT = 3000;
 const SALT = process.env.SALT || 'your-salt-value';
 const MongoDBURL = process.env.MongoDBURL
-const CHANNEL_ID = '@spintestdemo';
+const CHANNEL_ID = '@spin2earn_community';
 
 
 // MongoDB connection
@@ -171,7 +171,7 @@ bot1.start(async (msg) => {
   console.log(chatId);
   console.log(webAppUrlWithUserId.toString());
   
-  msg.reply('Welcome! Click the button below to open the WebApp:', {
+  msg.reply('Your next big win is just a spin away! Hit Play Now and start earning!', {
     reply_markup: {
       inline_keyboard: [
         [
