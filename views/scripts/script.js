@@ -29,25 +29,11 @@ let frame; // Variable to manage the confetti animation frame
 let timer; // Variable to hold the confetti timeout ID for adding confetti
 let spinInProgress = false;
 
-
 copyBtn.addEventListener("click",()=>{
   navigator.clipboard.writeText(url);
 })
 
-// shareBtn.addEventListener("click",()=>{
-//   if(navigator.share){
-//     navigator.share({
-//       title: "Join!!!",
-//       text: "This is the test text for sharing",
-//       url: url
-//       })
-//   }
-// })
-
-
-
 //Fetching Happen here
-
 async function fetchEcoins(userId) {
   try {
     const response = await fetch('/getEcoins', {
@@ -104,15 +90,21 @@ async function fetchUserFullDetails(userId) {
       // console.log(shareUrl);
       const link = document.getElementById('the-link')
       console.log(url);
-      
+
       var data = `Here is my referal link, Join now!!! ${url}`
       shareBtn.addEventListener('click', () => {
         const urlToShare = url;  // Your link
-        const message = 'This is my referal link, Do join';          // Your message
+        const message = ' 🎡 Spin2Earn 🎡 \n Join the fun and spin the wheel to win rewards! \n Earn free spins by inviting friends and complete simple tasks to collect coins! 🎁 \n Start spinning and winning today! \n ';          // Your message
         const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(urlToShare)}&text=${encodeURIComponent(message)}`;
-        
+
         // Redirect to the Telegram share URL
         window.location.href = telegramUrl;
+        // if referels does't updated it self
+        document.addEventListener("visibilitychange", function() {
+          if (document.visibilityState === 'visible') {
+              window.location.reload();
+          }
+        });
       });
     
   } catch (error) {
@@ -541,7 +533,7 @@ withdrawButton.addEventListener('click', async (e) => {
         }
       } catch (error) {
         console.error('Error:', error);
-        alert('An error occurred while submitting your request. Please try again later.');
+        showPopupMessage('An error occurred while submitting your request. Please try again later.');
       }
     }
   }
@@ -729,7 +721,7 @@ async function checkTask(button, reward, friends) {
 
       const data = await response.json();
       if (response.ok && data.message !== 'True') {
-        alert('You must join the Telegram channel to complete this task.');
+        showPopupMessage('You must join the Telegram channel to complete this task.');
         return;
       }
     } catch (error) {
@@ -743,7 +735,7 @@ async function checkTask(button, reward, friends) {
     const actualReferrals = referrals.length;
 
     if (actualReferrals < friends) {
-      alert(`You need to invite at least ${friends} friends to complete this task.`);
+      showPopupMessage(`You need to invite at least ${friends} friends to complete this task.`);
       return;
     }
   }
@@ -803,11 +795,11 @@ async function checkSpecialTask(button, inputValue) {
 
       claimReward(data.reward);
     } else {
-      alert(data.message);
+      showPopupMessage(data.message);
     }
   } catch (error) {
     console.error('Error:', error);
-    alert('An error occurred while checking the task. Please try again later.');
+    showPopupMessage('An error occurred while checking the task. Please try again later.');
   }
 }
 
@@ -902,6 +894,90 @@ navLinks.forEach(link => {
     });
     document.querySelector(target).style.display = 'block';
   });
+});
+
+// Detect changes in screen navigation (e.g., tab clicks or page changes)
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        if (isWheelScreenActive()) {
+            startCoinCreation(); // Start creating coins if navigating to the wheel screen
+        } else {
+            stopCoinCreation(); // Stop creating coins if navigating away from the wheel screen
+        }
+    });
+});
+
+// Function to create a controlled number of coins
+function createCoins() {
+  const coinContainer = document.getElementById('coin-container'); // Get the coin container
+  const coinCount = 5; // Set the number of coins to create in each batch (e.g., 5 coins)
+
+  // Loop to create the specified number of coins
+  for (let i = 0; i < coinCount; i++) {
+    // Create a new div for each coin
+    const coin = document.createElement('div');
+    coin.classList.add('coin'); // Add the 'coin' class to the div
+
+    // Create an img element for the coin image
+    const coinImg = document.createElement('img');
+    coinImg.src = '../images/ecoin.png';
+
+    // Append the image to the coin div
+    coin.appendChild(coinImg);
+
+    // Randomize the coin's horizontal (X-axis) starting position
+    const randomX = Math.random() * window.innerWidth;
+
+    // Set the coin's position: randomX for horizontal, slightly above the screen (-20px)
+    coin.style.left = `${randomX}px`;
+    coin.style.top = `-20px`;
+
+    // Randomize the start delay for each coin's animation to create a natural effect
+    coin.style.animationDelay = `${Math.random() * 9}s`; // Reduce delay to make fewer overlapping coins
+
+    // Add the coin to the container
+    coinContainer.appendChild(coin);
+
+    // Remove the coin after its animation is complete to avoid overcrowding
+    coin.addEventListener('animationend', () => {
+      coin.remove();
+    });
+  }
+}
+
+// Function to start coin creation
+function startCoinCreation() {
+  if (!coinInterval) { // Start interval only if it's not already running
+      createCoins(); // Create initial batch of coins
+      coinInterval = setInterval(createCoins, 1000); // Start creating coins at regular intervals
+  }
+}
+
+// Function to stop coin creation
+function stopCoinCreation() {
+  clearInterval(coinInterval); // Clear the interval
+  coinInterval = null; // Reset the interval variable
+}
+
+// Function to check if the wheel screen is active
+function isWheelScreenActive() {
+  const wheelScreen = document.querySelector('.wheel-screen');
+  return wheelScreen && window.getComputedStyle(wheelScreen).display !== 'none';
+}
+
+// Event listener for tab visibility change
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+      stopCoinCreation(); // Stop creating coins when the tab is inactive
+  } else if (isWheelScreenActive()) {
+      startCoinCreation(); // Resume creating coins when the tab is active and the wheel screen is visible
+  }
+});
+
+window.addEventListener('load', () => {
+  if (isWheelScreenActive()) {
+      startCoinCreation(); // Start coin creation if the wheel screen is initially active
+  }
 });
 
 // Confetti function (or) result effects
@@ -1147,3 +1223,16 @@ document.addEventListener('DOMContentLoaded', function() {
       hideLoadingScreen();
   }, 1000); // 1 second
 });
+
+// pop up messages
+function showPopupMessage(message) {
+  const popup = document.getElementById('popup-message');
+  popup.textContent = message;
+  popup.classList.remove('hidden');
+  popup.classList.add('visible');
+
+  setTimeout(() => {
+    popup.classList.remove('visible');
+    popup.classList.add('hidden');
+  }, 3000);
+}
