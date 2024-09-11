@@ -264,27 +264,30 @@ html {
   position: relative;
   background: #272A2F;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.380);
-  padding: 10px 20px;
+  padding: 10px 1px;
   border-radius: 20px;
   margin-top: 50%;
   margin-bottom: 3%;
-  width: 90%;
+  width: 85%;
 }
 
 .invite-title {
+  text-align: center;
   color: rgb(240, 240, 240);
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 2%;
-  display: inline;
+  display: block;
 }
 
 .links-box {
-  display: inline;
+  display: flex;
+  justify-content: space-around;
 }
 
 .referrals-link-btn, .referrals-share-btn{
-  border-radius: 20px;
+  border-radius: 5px;
+  width: 30%;
   margin-left: 3%;
   margin-bottom: 5%;
   background-color: #309CDD;
@@ -295,10 +298,11 @@ html {
 }
 
 .referrals-share-btn {
-  display: inline-block;
+  text-align: center;
+  display: inline;
   margin-left: 1%;
   font-size: 13px;
-  padding: 7px 12px;
+  padding: 7.6px 12px;
 }
 
 .referrals-link-btn:hover, .referrals-share-btn:hover {
@@ -309,6 +313,8 @@ html {
 
 .the-link {
   font-size: 16px;
+  text-align: center;
+  width: 100%;
   color: rgb(200, 200, 200);
   display: -webkit-box;
   -webkit-line-clamp: 2;
