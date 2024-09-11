@@ -24,30 +24,17 @@ let user = {
 const params = new URLSearchParams(window.location.search);
 const userId = params.get('userId');
 
+let coinInterval; // Global variable to manage the interval
 let confettiTimeout; // Variable to hold the confetti timeout ID
 let frame; // Variable to manage the confetti animation frame
 let timer; // Variable to hold the confetti timeout ID for adding confetti
 let spinInProgress = false;
 
-
 copyBtn.addEventListener("click",()=>{
   navigator.clipboard.writeText(url);
 })
 
-// shareBtn.addEventListener("click",()=>{
-//   if(navigator.share){
-//     navigator.share({
-//       title: "Join!!!",
-//       text: "This is the test text for sharing",
-//       url: url
-//       })
-//   }
-// })
-
-
-
 //Fetching Happen here
-
 async function fetchEcoins(userId) {
   try {
     const response = await fetch('/getEcoins', {
@@ -108,11 +95,17 @@ async function fetchUserFullDetails(userId) {
       var data = `Here is my referal link, Join now!!! ${url}`
       shareBtn.addEventListener('click', () => {
         const urlToShare = url;  // Your link
-        const message = 'This is my referal link, Do join';          // Your message
+        const message = ' 🎡 Spin2Earn 🎡 \n Join the fun and spin the wheel to win rewards! \n Earn free spins by inviting friends and complete simple tasks to collect coins! 🎁 \n Start spinning and winning today! \n ';          // Your message
         const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(urlToShare)}&text=${encodeURIComponent(message)}`;
 
         // Redirect to the Telegram share URL
         window.location.href = telegramUrl;
+        // if referels does't updated it self
+        document.addEventListener("visibilitychange", function() {
+          if (document.visibilityState === 'visible') {
+              window.location.reload();
+          }
+        });
       });
     
   } catch (error) {
