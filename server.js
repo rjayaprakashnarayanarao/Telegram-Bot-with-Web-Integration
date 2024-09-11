@@ -18,7 +18,7 @@ const WEBAPP_URL = process.env.WEBAPP;
 const PORT = 3000;
 const SALT = process.env.SALT || 'your-salt-value';
 const MongoDBURL = process.env.MongoDBURL
-const CHANNEL_ID = '@spintestdemo';
+const CHANNEL_ID = '@spin2earn_community';
 
 
 // MongoDB connection
@@ -99,17 +99,6 @@ function generateReferralUrl(userId) {
   return `https://t.me/${process.env.BOT_USERNAME}?start=${hash}`;
 }
 
-// Set up the menu button globally
-// bot.setChatMenuButton({
-//   menu_button: {
-//     type: 'web_app',
-//     text: 'Open Game',
-//     web_app: { url: WEBAPP_URL }
-//   }
-// }).catch((error) => {
-//   console.error('Error setting menu button:', error);
-// });
-
 bot1.telegram.setChatMenuButton({
   menu_button: {
         type: 'web_app',
@@ -171,7 +160,7 @@ bot1.start(async (msg) => {
   console.log(chatId);
   console.log(webAppUrlWithUserId.toString());
   
-  msg.reply('Welcome! Click the button below to open the WebApp:', {
+  msg.reply('Your next big win is just a spin away! Hit Play Now and start earning!', {
     reply_markup: {
       inline_keyboard: [
         [
@@ -443,13 +432,13 @@ app.post('/getECoins', async (req, res) => {
 
 
 // Cron job to ping the server every 4 minutes to keep it active
-cron.schedule('*/4 * * * *', () => {
-  console.log('Pinging the server to keep it active...');
-  fetch(`${WEBAPP_URL}checkHealth`,{method: 'GET'})
-      .then(res => res.text())
-      .then(body => console.log(`Server response: ${body}`))
-      .catch(err => console.error('Error pinging the server:', err));
-});
+// cron.schedule('*/4 * * * *', () => {
+//   console.log('Pinging the server to keep it active...');
+//   fetch(`${WEBAPP_URL}checkHealth`,{method: 'GET'})
+//       .then(res => res.text())
+//       .then(body => console.log(`Server response: ${body}`))
+//       .catch(err => console.error('Error pinging the server:', err));
+// });
 
 app.get('/checkHealth',(req,res)=>{
   res.status(200).json("All ok!!!");
