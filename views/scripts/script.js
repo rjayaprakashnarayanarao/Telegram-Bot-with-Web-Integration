@@ -601,6 +601,7 @@ function showTasks(type) {
     tasksContainer.innerHTML = generateTaskHTML('Join Telegram Channel', 1000, 'fa fa-telegram',0) +
                                generateTaskHTML('Subscribe Youtube Channel', 250, 'fa fa-youtube',0) +
                                generateTaskHTML('Watch Youtube Video', 150, 'fa fa-youtube',0) +
+                               generateTaskHTML('Video', 150, 'fa fa-youtube',0) +
                                generateSpecialTaskHTML('Special Task 1', 5000, 'special-input-1', 'fa fa-trophy', '123456') +
                                generateSpecialTaskHTML('Special Task 2', 5000, 'special-input-2', 'fa fa-medal', '9999');
   } 
@@ -657,8 +658,8 @@ function goToTask(taskName) {
     'Special Task 2': 'https://link.vipurl.in/18e3vGa',
   };
 
-  // Save task state in localStorage
-  // localStorage.setItem(`${taskName}_started`, 'true');
+  // Mark the task as having its "Go" button clicked
+  taskGoClicked[taskName] = true;
 
   if (taskName.startsWith('Invite')) {
     const addFriendLink = document.querySelector('a[href="#add-friend"]');
@@ -685,6 +686,12 @@ function goToTask(taskName) {
 async function checkTask(button, reward, friends) {
   const taskItem = button.closest('.task-item');
   const taskName = taskItem.id.replace(/-/g, ' ');
+
+  // Check if the "Go" button was clicked
+  if (!taskGoClicked[taskName]) {
+    showPopupMessage('Complete the task Properly');
+    return;
+  }
 
   // Ensure that the "Go" button was clicked before checking for tasks like "Subscribe Youtube Channel" or "Watch Youtube Video"
   if (['Subscribe Youtube Channel', 'Watch Youtube Video'].includes(taskName)) {
