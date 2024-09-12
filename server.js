@@ -147,6 +147,7 @@ bot1.start(async (msg) => {
         const referrer = await User.findOne({ referralUrl: `https://t.me/${process.env.BOT_USERNAME}?start=${referralCode}` });
         if (referrer) {
           referrer.referrals.push(username);
+          referrer.spinsLeft += 1;
           await referrer.save();
         }
       } catch (error) {
