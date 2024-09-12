@@ -600,10 +600,9 @@ function showTasks(type) {
     dailyTab.classList.add('active');
     tasksContainer.innerHTML = generateTaskHTML('Join Telegram Channel', 1000, 'fa fa-telegram',0) +
                                generateTaskHTML('Subscribe Youtube Channel', 250, 'fa fa-youtube',0) +
-                               generateTaskHTML('Watch Youtube Video', 150, 'fa fa-youtube',0) +
-                               generateTaskHTML('Video', 150, 'fa fa-youtube',0) +
-                               generateSpecialTaskHTML('Special Task 1', 5000, 'special-input-1', 'fa fa-trophy', '123456') +
-                               generateSpecialTaskHTML('Special Task 2', 5000, 'special-input-2', 'fa fa-medal', '9999');
+                               generateSpecialTaskHTML('Code Cracker 1', 200, 'Code-Cracker-1', 'fa fa-trophy', 'R9V1M8') +
+                               generateSpecialTaskHTML('Code Cracker 2', 200, 'Code-Cracker-2', 'fa fa-trophy', 'xkmQ4f') +
+                               generateSpecialTaskHTML('Code Cracker 3', 200, 'Code-Cracker-3', 'fa fa-trophy', 't9Y33Fd');
   } 
   else if (type === 'weekly') {
     weeklyTab.classList.add('active');
@@ -653,9 +652,9 @@ function goToTask(taskName) {
   const taskLinks = {
     'Join Telegram Channel': 'https://t.me/spintestdemo',
     'Subscribe Youtube Channel': 'https://youtube.com/@spin2earn-rvm?si=m7r7G8zLSNU-Zv2T',
-    'Watch Youtube Video': 'https://youtu.be/SmRltCNkOQI?si=ruh9kBDTo9O-o9NC',
-    'Special Task 1': 'https://link.vipurl.in/18e3vGa',
-    'Special Task 2': 'https://link.vipurl.in/18e3vGa',
+    'Code Cracker 1': 'https://link.vipurl.in/2V5JlW',
+    'Code Cracker 2': 'https://publicearn.com/MT0JjEzi',
+    'Code Cracker 3': 'https://publicearn.com/KsNC8zQS',
   };
 
   // Mark the task as having its "Go" button clicked
