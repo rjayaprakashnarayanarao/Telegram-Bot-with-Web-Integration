@@ -650,7 +650,7 @@ const taskGoClicked = {};
 // Function to handle the "Go" button click
 function goToTask(taskName) {
   const taskLinks = {
-    'Join Telegram Channel': 'https://t.me/spintestdemo',
+    'Join Telegram Channel': 'https://t.me/spin2earn_community',
     'Subscribe Youtube Channel': 'https://youtube.com/@spin2earn-rvm?si=m7r7G8zLSNU-Zv2T',
     'Code Cracker 1': 'https://link.vipurl.in/2V5JlW',
     'Code Cracker 2': 'https://publicearn.com/MT0JjEzi',
