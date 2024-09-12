@@ -16,15 +16,14 @@
 </head>
 <body>
 
-  <button onclick="redirectToTelegram()">Let's Go</button>
+  <div id="loading-screen">
+    <div class="spinner"></div>
+  </div>
+
+  <div id="main-content">
+    <button onclick="redirectToTelegram()">Let's Go</button>
+  </div>
   
   <script src="scripts/join.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      
-      window.Telegram.WebApp.ready();
-      window.Telegram.WebApp.expand();
-    });
-  </script>
 </body>
 </html>

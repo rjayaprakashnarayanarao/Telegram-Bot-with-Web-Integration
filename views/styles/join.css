@@ -3,22 +3,30 @@ html,body {
     padding: 0;
     height: 100%;
     width: 100%;
+    background-color: rgba(15, 13, 13, 0.795);
     -webkit-tap-highlight-color: transparent;
 }
 
 body {
-    background-image: url(../images/lion.jpg);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+}
+
+body.background-loaded {
+    background-image: url('../images/lion.jpg');
 }
 
 button {
     position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     top: 80%;
+    width: 75%;
     padding: 15px 70px;
     font-size: 30px;
     font-family: 'Roboto Slab', serif;
@@ -36,4 +44,38 @@ button {
 button:hover {
     background-color: #3b3b3b;
     color: #f1f30a;
+}
+
+/* Loading Screen */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.spinner {
+    border: 8px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 8px solid #ffffff;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Hide the main content initially */
+#main-content {
+    display: none;
 }
