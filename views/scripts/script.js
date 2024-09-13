@@ -633,16 +633,17 @@ function generateSpecialTaskHTML(taskName, reward, inputId, icon, keyCode) {
       <div class="task-icon">
         <i class="${icon}"></i>
       </div>
-      <p>${taskName}</p><br/>
+      <p>${taskName}</p>
       <p>Reward: ${reward} coins</p>
       <div class="task-buttons">
         <button class="go-button" onclick="goToTask('${taskName}')">Go</button>
-        <input type="text" id="${inputId}" class="special-input" placeholder="Enter code">
-        <button class="check-button" onclick="checkSpecialTask(this, document.getElementById('${inputId}').value)">Submit</button>
+        <input type="text" id="${inputId}input" class="special-input" placeholder="Enter code">
+        <button class="check-button" onclick="checkSpecialTask(this,document.getElementById('${inputId}input').value)">Submit</button>
       </div>
     </div>
   `;
 }
+
 
 // Object to store the click status of the "Go" button for each task
 const taskGoClicked = {};
@@ -768,11 +769,13 @@ async function checkTask(button, reward, friends) {
 
 
 
-async function checkSpecialTask(button, inputValue) {
+async function checkSpecialTask(button,inputValue) {
   const taskName = button.closest('.task-item').id.replace(/-/g, ' ');
-  const data = JSON.stringify({ taskName, inputValue })
-  // console.log(data);
+  console.log(inputValue);
   
+  const data = JSON.stringify({ taskName, inputValue });
+  console.log('Input Value:', data); // Debugging log
+
   try {
     const response = await fetch('/checkSpecialTask', {
       method: 'POST',
@@ -782,7 +785,7 @@ async function checkSpecialTask(button, inputValue) {
       body: JSON.stringify({ taskName, inputValue }),
     });
 
-    const data = await response.json();
+    const responseData = await response.json();
 
     if (response.ok) {
       const taskItem = button.closest('.task-item');
@@ -800,15 +803,16 @@ async function checkSpecialTask(button, inputValue) {
         }, 1000);
       }, 500);
 
-      claimReward(data.reward);
+      claimReward(responseData.reward);
     } else {
-      showPopupMessage(data.message);
+      showPopupMessage(responseData.message);
     }
   } catch (error) {
     console.error('Error:', error);
     showPopupMessage('An error occurred while checking the task. Please try again later.');
   }
 }
+
 
 async function updateTaskStatus(taskName) {
   await fetch('/user/tasks/completed', {
