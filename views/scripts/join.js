@@ -46,3 +46,5 @@ document.addEventListener('DOMContentLoaded', function() {
         hideLoadingScreen();
     }, 1000); // 1 second
 });
+
+

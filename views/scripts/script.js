@@ -195,10 +195,17 @@ function generatePrizeAmount(user) {
   } else if (spinCount === 6 || spinCount === 7) {
     prize = Math.floor(Math.random() * (1520 - 1450 + 1)) + 1450;
   } else if (spinCount >= 8 && spinCount <= 10) {
-    prize = Math.floor(Math.random() * (1030 - 990 + 1)) + 2950;
-  } else {
+    prize = Math.floor(Math.random() * (1030 - 990 + 1)) + 990;
+  } else if (spinCount >= 11 && spinCount <= 12) {
     prize = Math.floor(Math.random() * (450 - 400 + 1)) + 400;
+  } else if (spinCount >= 13 && spinCount <= 14) {
+    prize = Math.floor(Math.random() * (350 - 300 + 1)) + 300;
+  } else if (spinCount >= 15 && spinCount <= 18) {
+    prize = Math.floor(Math.random() * (250 - 200 + 1)) + 200;
+  } else {
+    prize = Math.floor(Math.random() * (150 - 100 + 1)) + 100;
   }
+
   user.totalCoins += prize;
   user.spinCount++;
 
@@ -606,8 +613,8 @@ function showTasks(type) {
   } 
   else if (type === 'weekly') {
     weeklyTab.classList.add('active');
-    tasksContainer.innerHTML = generateTaskHTML('Invite 10 friends', 7000, 'fa fa-people-pulling',10) +
-                               generateTaskHTML('Invite 20 friends', 15000, 'fa fa-users',20);
+    tasksContainer.innerHTML = generateTaskHTML('Invite 10 friends', 1000, 'fa fa-people-pulling',10) +
+                               generateTaskHTML('Invite 20 friends', 3000, 'fa fa-users',20);
   }
 }
 
@@ -653,7 +660,7 @@ function goToTask(taskName) {
   const taskLinks = {
     'Join Telegram Channel': 'https://t.me/spin2earn_community',
     'Subscribe Youtube Channel': 'https://youtube.com/@spin2earn-rvm?si=m7r7G8zLSNU-Zv2T',
-    'Code Cracker 1': 'https://link.vipurl.in/2V5JlW',
+    'Code Cracker 1': 'https://spin2earngame.blogspot.com/2024/09/code-cracker-1.html?m=1 ',
     'Code Cracker 2': 'https://publicearn.com/MT0JjEzi',
     'Code Cracker 3': 'https://publicearn.com/KsNC8zQS',
   };
