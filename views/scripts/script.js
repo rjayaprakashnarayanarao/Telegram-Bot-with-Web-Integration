@@ -373,7 +373,7 @@ withdrawButton.addEventListener('click', async (e) => {
 
   let isValid = true;
   let errorMessage = '';
-  let confirmationMessage = 'You Will Receive your money in 3-4 days, Please check your mail for Transaction';
+  let confirmationMessage = 'You Will Receive your money in 3-4 days, Please check your mail for Transaction Details';
 
   // Clear previous messages
   formError.style.display = 'none';
@@ -662,9 +662,9 @@ function goToTask(taskName) {
     'Join Maddy Channel':'https://t.me/+J-t-5Yk0s2liZDE9',
     'Join Telegram Channel': 'https://t.me/spin2earn_community',
     'Subscribe Youtube Channel': 'https://youtube.com/@spin2earn-rvm?si=m7r7G8zLSNU-Zv2T',
-    'Code Cracker 1': 'https://spin2earngame.blogspot.com/2024/09/code-cracker-1.html?m=1 ',
-    'Code Cracker 2': 'https://publicearn.com/MT0JjEzi',
-    'Code Cracker 3': 'https://publicearn.com/KsNC8zQS',
+    'Code Cracker 1': 'https://publicearn.com/OUG0',
+    'Code Cracker 2': 'https://publicearn.com/nqHDD',
+    'Code Cracker 3': 'https://publicearn.com/2QedxMI',
   };
 
   // Mark the task as having its "Go" button clicked
