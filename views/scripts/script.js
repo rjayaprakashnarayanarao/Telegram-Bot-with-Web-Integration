@@ -373,7 +373,7 @@ withdrawButton.addEventListener('click', async (e) => {
 
   let isValid = true;
   let errorMessage = '';
-  let confirmationMessage = 'You Will Receive your money in 3-4 days';
+  let confirmationMessage = 'You Will Receive your money in 3-4 days, Please check your mail for Transaction';
 
   // Clear previous messages
   formError.style.display = 'none';
