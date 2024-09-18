@@ -15,6 +15,7 @@ let url;
 let referrals;
 let userData;
 let totalCoins = 0;
+var tasksCompleted =''
 
 let user = {
   spinCount: 0,     // Start at the first spin
@@ -565,7 +566,7 @@ async function fetchTasks() {
     body: JSON.stringify({ userId: userId })
   });
 
-  const tasksCompleted = await response.json();
+  tasksCompleted = await response.json();
   updateTaskUI(tasksCompleted);
 }
 
@@ -601,7 +602,7 @@ function showTasks(type) {
   dailyTab.classList.remove('active');
   weeklyTab.classList.remove('active');
 
-  fetchTasks();
+  // fetchTasks();
 
   if (type === 'daily') {
     dailyTab.classList.add('active');
@@ -616,6 +617,7 @@ function showTasks(type) {
     tasksContainer.innerHTML = generateTaskHTML('Invite 10 friends', 1000, 'fa fa-people-pulling',10) +
                                generateTaskHTML('Invite 20 friends', 3000, 'fa fa-users',20);
   }
+  updateTaskUI(tasksCompleted);
 }
 
 function generateTaskHTML(taskName, reward, icon,friends) {
