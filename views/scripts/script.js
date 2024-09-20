@@ -606,7 +606,8 @@ function showTasks(type) {
 
   if (type === 'daily') {
     dailyTab.classList.add('active');
-    tasksContainer.innerHTML = generateTaskHTML('Join Telegram Channel', 500, 'fa fa-telegram',0) +
+    tasksContainer.innerHTML = generateTaskHTML('Join Telegram Channel 2', 200, 'fa fa-telegram',0) +
+                               generateTaskHTML('Join Telegram Channel', 250, 'fa fa-telegram',0) +
                                generateTaskHTML('Subscribe Youtube Channel', 250, 'fa fa-youtube',0) +
                                generateSpecialTaskHTML('Code Cracker 1', 200, 'Code-Cracker-1', 'fa fa-trophy', 'R9V1M8') +
                                generateSpecialTaskHTML('Code Cracker 2', 200, 'Code-Cracker-2', 'fa fa-trophy', 'xkmQ4f') +
@@ -660,6 +661,7 @@ const taskGoClicked = {};
 // Function to handle the "Go" button click
 function goToTask(taskName) {
   const taskLinks = {
+    'Join Telegram Channel 2':'https://t.me/+zoEMa2mavsc0M2Q1',
     'Join Telegram Channel': 'https://t.me/spin2earn_community',
     'Subscribe Youtube Channel': 'https://youtube.com/@spin2earn-rvm?si=m7r7G8zLSNU-Zv2T',
     'Code Cracker 1': 'https://publicearn.com/OUG0',
