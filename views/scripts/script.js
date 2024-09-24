@@ -560,14 +560,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 async function fetchTasks() {
-  const response = await fetch('/user/tasks/status', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ userId: userId })
-  });
+  try {
+    const response = await fetch('/user/tasks/status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId: userId })
+    });
 
-  tasksCompleted = await response.json();
-  updateTaskUI(tasksCompleted);
+    tasksCompleted = await response.json();
+    updateTaskUI(tasksCompleted);
+  } catch (error) {
+    console.error('Error fetching tasks:', error);
+    // You can also display an error message to the user here
+  }
 }
 
 
@@ -605,6 +610,8 @@ function showTasks(type) {
   // fetchTasks();
 
   if (type === 'daily') {
+    // console.log("Clicked daily");
+    fetchTasks();
     dailyTab.classList.add('active');
     tasksContainer.innerHTML = generateTaskHTML('Join Telegram Channel 2', 200, 'fa fa-telegram',0) +
                                generateTaskHTML('Join Telegram Channel', 250, 'fa fa-telegram',0) +
@@ -614,6 +621,8 @@ function showTasks(type) {
                                generateSpecialTaskHTML('Code Cracker 3', 200, 'Code-Cracker-3', 'fa fa-trophy', 't9Y33Fd');
   } 
   else if (type === 'weekly') {
+    // console.log("clicked weekly");
+    fetchTasks();
     weeklyTab.classList.add('active');
     tasksContainer.innerHTML = generateTaskHTML('Invite 10 friends', 1000, 'fa fa-people-pulling',10) +
                                generateTaskHTML('Invite 20 friends', 3000, 'fa fa-users',20);
@@ -697,6 +706,9 @@ function goToTask(taskName) {
 async function checkTask(button, reward, friends) {
   const taskItem = button.closest('.task-item');
   const taskName = taskItem.id.replace(/-/g, ' ');
+
+  // Fetch the updated tasks from the backend
+  await fetchTasks();
 
   // Check if the "Go" button was clicked
   if (!taskGoClicked[taskName]) {
